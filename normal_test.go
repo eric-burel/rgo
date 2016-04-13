@@ -17,6 +17,15 @@ func TestNewStdNormal(t *testing.T) {
 }
 
 func TestNormalR(t *testing.T){
+    var x = NewStdNormal()
+    var x1 = x.R()
+    assert.NotNil(t,x1)
+}
+func TestNormalRn(t *testing.T){
+    var x = NewStdNormal()
+    var x1 = x.Rn(20)
+    assert.Equal(t,20, len(x1))
+    t.Logf("Generated values with mu = 0, sigma = 1 : %v", x1)
 }
 func TestNormalD(t *testing.T){
 }
