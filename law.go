@@ -7,8 +7,8 @@ import(
 // Probability A float belonging to [0,1]
 type Probability float64
 
-// Law Implements a probalistic law
-type Law interface{
+// Lawer Implements a probalistic law
+type Lawer interface{
     // Generate
     Rn(n int) []interface{}
     R() interface{}
