@@ -1,8 +1,5 @@
 package rgo
 
-import(
-    "math"
-)
 
 // Probability A float belonging to [0,1]
 type Probability float64
