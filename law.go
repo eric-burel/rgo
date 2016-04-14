@@ -1,8 +1,6 @@
 package rgo
 
 
-// Probability A float belonging to [0,1]
-type Probability float64
 
 // Lawer Implements a probalistic law
 type Lawer interface{
@@ -10,25 +8,25 @@ type Lawer interface{
     Rn(n int) []interface{}
     R() interface{}
     // probability density function
-    D(value interface{}) Probability
+    D(value interface{}) float64
     // cumulative probability density function
-    P(value interface{}) Probability
+    P(value interface{}) float64
     // quantile
-    Q(value Probability) float64
+    Q(value float64) float64
 }
 
 // Discrete Implements a discrete law
 type Discrete interface{
     Rn(length int) []int
     R() int
-    D(value int) Probability
-    P(value int) Probability
+    D(value int) float64
+    P(value int) float64
 }
 
 // Continuous Implements a continous law
 type Continuous interface{
     Rn(length float64) []int
     R() int
-    D(value float64) Probability
-    P(value float64) Probability
+    D(value float64) float64
+    P(value float64) float64
 }
