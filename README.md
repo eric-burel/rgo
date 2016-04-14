@@ -44,6 +44,10 @@ Working on it...
 # Roadmap
 - [ ] add most common probability laws (Gaussian, Poisson and so on)
 - [ ] add other less common laws (Reverse Binomial *et al.*)
+- [ ] implement quantile calculation
+- [ ] implement cumulative density function
+- [ ] review naive implementations (mathematician needed)
+- [ ] add error cases
 - [ ] add multidimensionnal laws
 - [ ] add performance tests
 - [ ] add precision tests
