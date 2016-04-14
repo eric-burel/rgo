@@ -24,6 +24,33 @@ import (
 
 [See godoc](https://godoc.org/github.com/eric-burel/rgo) for a list of all functionnalities.
 
+An example :
+
+```go
+package main
+
+import (
+  "github.com/eric-burel/rgo"
+)
+x := NewNorm(25.,1.)
+
+todayTemperature := x.R()       // generate a random value, following a N(25,1) distributon
+thisWeekTemperature := x.Rn(7)  // generate an array of 7 random values
+
+f24 := x.D(24.)  // get f(24), density of this Gaussian distribution for x = 24
+
+// we can then calculate likelihood of thisWeekTemperature
+likelihood := 1
+for _, t := range(thisWeekTemperature){
+  likelihood *= x.D(t)
+}
+
+// Another example using standard definition of laws when they exist
+y := NewStdUnif()   // use classical definition, ie interval [0.,1.[
+whiteNoise := y.R() // white nose is between 0. and 1.
+
+
+```
 
 ## Random number generation
 
