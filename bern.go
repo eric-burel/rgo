@@ -1,0 +1,50 @@
+package rgo
+
+// Bern A variable following a normal distribution
+type Bern struct{
+    p float64
+    // 1-p
+    q float64
+}
+
+
+// NewBern Generate a new variable following a Gaussian law
+func NewBern(p float64) (x *Bern){
+    x = &Bern{p,1.-p}
+    return
+}
+
+// NewStdBern Generate a new variable following a centered, reduced Gaussian law
+// (mu=0, sigma=1)
+func NewStdBern() (x *Bern){
+    x = NewBern(0.5)
+    return
+}
+
+// R Generate a random value following the same Bernouilli distribution as x
+func (x Bern) R() int64 {
+    var u = NewStdUnif()
+    // maybe there is a more idomatic way link int(u.R()<p)
+    if u.R() < x.p {
+        return 1
+    }
+    return  0
+}
+// Rn Generate an array of random values following the same Bern distribution as x
+func (x Bern) Rn(n int) (res []int64){
+    res = make([]int64, n)
+    for i := 0; i < n; i++ {
+        res[i] = x.R()
+    }
+    return
+}
+
+// D Density probability function of the Bernouilli distribution
+func (x Bern) D(k int64) float64{
+    if (k == 0){
+        return x.p
+    } else if (k == 1 ){
+        return x.q
+    }
+    return 0.
+}
