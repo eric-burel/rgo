@@ -26,7 +26,7 @@ func NewStdBern() (x *Bern){
 }
 
 // R Generate a random value following the same Bernouilli distribution as x
-func (x Bern) R() int64 {
+func (x Bern) R() int {
     var u = NewStdUnif()
     // maybe there is a more idomatic way link int(u.R()<p)
     if u.R() < x.p {

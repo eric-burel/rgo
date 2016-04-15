@@ -1,16 +1,16 @@
 package rgo
 
-// IsProba Checks whether a float represent a probability or not
+// IsProba Checks whether a float64 represent a probability or not
 func IsProba(p float64) (bool){
     return (p >= 0. && p <= 1.0)
 }
 
-type int64Arr []int64
+type intArr []int
 type float64Arr []float64
 
-// Sum Returns the sum of an int64 array
+// Sum Returns the sum of an int array
 // TODO Refactor me into one sum function using interface or slices
-func (array int64Arr) Sum() (s int64){
+func (array intArr) Sum() (s int){
     s = 0
     for _, v := range(array){
         s += v
