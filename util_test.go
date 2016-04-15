@@ -17,8 +17,8 @@ func TestIsProba(t *testing.T){
 }
 
 func TestSumInt64(t * testing.T){
-    var array = int64Arr{10,10,20};
-    assert.Equal(t, int64(40), array.Sum())
+    var array = intArr{10,10,20};
+    assert.Equal(t, int(40), array.Sum())
 }
 func TestSumFloat64(t * testing.T){
     var array = float64Arr{10.,10.,20.}

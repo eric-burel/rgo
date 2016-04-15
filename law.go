@@ -20,8 +20,8 @@ type Lawer interface{
 
 // Discreter Implements a discrete law
 type Discreter interface{
-    Rn(length int) []int64
-    R() int64
+    Rn(length int) []int
+    R() int
     D(value int) float64
     P(value int) float64
 }
@@ -55,11 +55,11 @@ func (c Continuous) Rn(n int) (res []float64){
     return
 }
 // Rn Generate n draws of a discrete random variable
-func (d Discrete) Rn(n int) (res []int64) {
+func (d Discrete) Rn(n int) (res []int) {
     if (n < 0){
         panic(errors.New("n must be positive"))
     }
-    res = make([]int64,n)
+    res = make([]int,n)
     for i := 0; i < n; i++{
         //res[i] = d.R()
         d.R()
