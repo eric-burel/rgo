@@ -15,3 +15,12 @@ func TestIsProba(t *testing.T){
     assert.False(t, IsProba(1.1))
     assert.False(t, IsProba(-0.1))
 }
+
+func TestSumInt64(t * testing.T){
+    var array = int64Arr{10,10,20};
+    assert.Equal(t, int64(40), array.Sum())
+}
+func TestSumFloat64(t * testing.T){
+    var array = float64Arr{10.,10.,20.}
+    assert.Equal(t, 40., array.Sum())
+}
