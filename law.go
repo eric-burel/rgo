@@ -61,8 +61,7 @@ func (d Discrete) Rn(n int) (res []int) {
     }
     res = make([]int,n)
     for i := 0; i < n; i++{
-        //res[i] = d.R()
-        d.R()
+        res[i] = d.R()
     }
     return
 }
