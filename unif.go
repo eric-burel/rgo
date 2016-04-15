@@ -4,6 +4,7 @@ import(
 )
 // Unif A variable following a normal distribution
 type Unif struct{
+    Continuous
     min float64
     max float64
     interval float64
@@ -12,7 +13,8 @@ type Unif struct{
 
 // NewUnif Generate a new variable following a Gaussian law
 func NewUnif(min float64, max float64) (x *Unif){
-    x = &Unif{min, max, max-min}
+    x = &Unif{Continuous{},min, max, max-min}
+    x.Continuous = Continuous{x}
     return
 }
 
@@ -26,14 +28,6 @@ func NewStdUnif() (x *Unif){
 // R Generate a random value following the same Unif distribution as x
 func (x Unif) R() (res float64){
     res = rand.Float64() * x.interval + x.min
-    return
-}
-// Rn Generate an array of random values following the same Unif distribution as x
-func (x Unif) Rn(n int) (res []float64){
-    res = make([]float64, n)
-    for i := 0; i < n; i++ {
-        res[i] = x.R()
-    }
     return
 }
 

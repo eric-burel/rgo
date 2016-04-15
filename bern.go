@@ -2,6 +2,7 @@ package rgo
 
 // Bern A variable following a normal distribution
 type Bern struct{
+    Discrete
     p float64
     // 1-p
     q float64
@@ -10,7 +11,10 @@ type Bern struct{
 
 // NewBern Generate a new variable following a Gaussian law
 func NewBern(p float64) (x *Bern){
-    x = &Bern{p,1.-p}
+    x = &Bern{Discrete{},p,1.-p}
+    // Discrete.discreter self reference X
+    // It allows to implement more general variables
+    x.Discrete = Discrete{x}
     return
 }
 
@@ -30,17 +34,10 @@ func (x Bern) R() int64 {
     }
     return  0
 }
-// Rn Generate an array of random values following the same Bern distribution as x
-func (x Bern) Rn(n int) (res []int64){
-    res = make([]int64, n)
-    for i := 0; i < n; i++ {
-        res[i] = x.R()
-    }
-    return
-}
+
 
 // D Density probability function of the Bernouilli distribution
-func (x Bern) D(k int64) float64{
+func (x Bern) D(k int) float64{
     if (k == 0){
         return x.p
     } else if (k == 1 ){

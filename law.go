@@ -1,5 +1,8 @@
 package rgo
 
+import(
+    "errors"
+)
 
 
 // Lawer Implements a probalistic law
@@ -15,18 +18,51 @@ type Lawer interface{
     Q(value float64) float64
 }
 
-// Discrete Implements a discrete law
-type Discrete interface{
-    Rn(length int) []int
-    R() int
+// Discreter Implements a discrete law
+type Discreter interface{
+    Rn(length int) []int64
+    R() int64
     D(value int) float64
     P(value int) float64
 }
 
-// Continuous Implements a continous law
-type Continuous interface{
-    Rn(length float64) []int
-    R() int
+// Continuouser Implements a continous law
+type Continuouser interface{
+    Rn(length int) []float64
+    R() float64
     D(value float64) float64
     P(value float64) float64
+}
+
+// Continuous A Continuous law
+type Continuous struct{
+    Continuouser
+}
+// Discrete A discret law
+type Discrete struct{
+    Discreter
+}
+
+// Rn Generate n draws of a continuous random variable
+func (c Continuous) Rn(n int) (res []float64){
+    if (n < 0){
+        panic(errors.New("n must be positive"))
+    }
+    res = make([]float64,n)
+    for i := 0; i < n; i++{
+        res[i] = c.R()
+    }
+    return
+}
+// Rn Generate n draws of a discrete random variable
+func (d Discrete) Rn(n int) (res []int64) {
+    if (n < 0){
+        panic(errors.New("n must be positive"))
+    }
+    res = make([]int64,n)
+    for i := 0; i < n; i++{
+        //res[i] = d.R()
+        d.R()
+    }
+    return
 }
