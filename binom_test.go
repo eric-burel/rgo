@@ -30,11 +30,19 @@ func TestBinomRn(t *testing.T){
     t.Logf("Generated values with n=10 p=0.5 : %v", x1)
 }
 func TestBinomD(t *testing.T){
-    /*var x = NewBinom(0.4)
-    var v1 = x.D(0)
-    var v2 = x.D(1)
-    assert.Equal(t, x.p, v1)
-    assert.Equal(t, x.q, v2)*/
+    var x = NewBinom(10,0.4)
+    var eps = 10e-8;
+    // values given by R
+    assert.InDelta(t, 0.006046618, x.D(0), eps)
+    assert.InDelta(t, 0.04031078, x.D(1), eps)
+    assert.InDelta(t, 0.2006581, x.D(5), eps)
+    assert.InDelta(t, 0.01061683, x.D(8), eps)
+    assert.InDelta(t, 0.0001048576, x.D(10), eps)
+}
+func TestBinomLim(t *testing.T){
+    var x = NewBinom(10,0.4)
+    assert.Equal(t,0., x.D(-1))
+    assert.Equal(t, 0., x.D(11))
 }
 
 func TestBinomP(t *testing.T){

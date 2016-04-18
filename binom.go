@@ -1,5 +1,8 @@
 package rgo
-
+import(
+    "math"
+    "math/big"
+)
 // Binom A variable following a binomial distribution
 type Binom struct{
     Discrete
@@ -34,6 +37,10 @@ func (x Binom) R() (res int) {
 
 // D Density probability function of the Binom distribution
 func (x Binom) D(k int) float64{
-    // TODO
-    return 0.
+    if (k < 0 || k > x.n){
+        return 0
+    }
+    binomial := new(big.Int).Binomial(int64(x.n), int64(k)) // Cnk
+    convertedBinomial := float64(binomial.Int64())
+    return  convertedBinomial * math.Pow(x.p, float64(k)) * math.Pow(x.q, float64(x.n-k))
 }
