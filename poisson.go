@@ -23,18 +23,25 @@ func NewStdPoisson() (x *Poisson){
 }
 
 // R Generate a random value following the same Poisson distribution as x
-func (x Poisson) R() (res float64){
+func (x Poisson) R() (res int){
+    var lambda = x.lambda;
+    var power = math.Log10(lambda);
+    var scale = 10e-3
+    // if lambda < 0.1, we do some scaling so that lambda/scale is an integer over 1
+    if (power < 0){
+        scale = scale*math.Pow(10, power)
+    }
     // TODO : here is a HUGE approximation
     // plus it does work bad (results get underestimated) if lambda is under 10e-3
     // a complete process to simulate Poisson is harder to implement but possible,
-    // and as been done
-    var binom = NewBinom(math.Ceil(x.lambda*10e3), 10e-3)
+    // and as been don  e
+    var binom = NewBinom(int(math.Ceil(lambda/scale)), scale)
     res = binom.R()
     return
 }
 // Rn Generate an array of random values following the same Poisson distribution as x
-func (x Poisson) Rn(n int) (res []float64){
-    res = make([]float64, n)
+func (x Poisson) Rn(n int) (res []int){
+    res = make([]int, n)
     for i := 0; i < n; i++ {
         res[i] = x.R()
     }
@@ -42,11 +49,11 @@ func (x Poisson) Rn(n int) (res []float64){
 }
 
 // D Density probability function of the the Poisson distribution
-func (x Poisson) D(k int64) (f float64){
+func (x Poisson) D(k int) (f float64){
     norm := math.Exp(-x.lambda)
     // this syntax avoid explosion, we multiply result by lambda, then divide it,
     // so that mult is neither too small nor too big after each step
-    mult := x.lambda
+    mult := 1. // lambda^0/0!
     for i := 1; i <= int(k) ; i++{
         mult *= x.lambda
         mult /= float64(i)
