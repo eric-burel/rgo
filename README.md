@@ -77,14 +77,14 @@ We chose the same definition as R, meaning __P(X=0) = p, with X following a geom
 This behaviour may differ from what you are used to. For example in France, we prefer to start with k=1, meaning P(X=1) = p, so that k is the number of draws before a success.
 
 # Roadmap
-- [ ] add most basic functions : bernouilli, uniform, binomial, poisson, geom, exponential
-- [ ] add most common probability laws (Gaussian, Poisson and so on)
+- [x] add most basic functions : bernouilli, uniform, binomial, poisson, normal, geom, exponential
 - [ ] add other less common laws (Reverse Binomial *et al.*)
 - [ ] implement quantile calculation
-- [ ] implement cumulative density function
+- [ ] implement cumulative density functions
 - [ ] review naive implementations (mathematician needed)
 - [ ] add error cases
 - [ ] add multidimensionnal laws
+- [ ] add more and more tests
 - [ ] add performance tests
 - [ ] add precision tests
 
