@@ -4,26 +4,26 @@ import(
     "math"
 )
 
-// Poisson A variable following a normal distribution
-type Poisson struct{
+// Pois A variable following a normal distribution
+type Pois struct{
     lambda float64
 }
 
-// NewPoisson Generate a new variable following a Gaussian law
-func NewPoisson(lambda float64) (x *Poisson){
-    x = &Poisson{lambda}
+// NewPois Generate a new variable following a Gaussian law
+func NewPois(lambda float64) (x *Pois){
+    x = &Pois{lambda}
     return
 }
 
-// NewStdPoisson Generate a new variable following a centered, reduced Gaussian law
+// NewStdPois Generate a new variable following a centered, reduced Gaussian law
 // (mu=0, sigma=1)
-func NewStdPoisson() (x *Poisson){
-    x = &Poisson{1.}
+func NewStdPois() (x *Pois){
+    x = &Pois{1.}
     return
 }
 
-// R Generate a random value following the same Poisson distribution as x
-func (x Poisson) R() (res int){
+// R Generate a random value following the same Pois distribution as x
+func (x Pois) R() (res int){
     var lambda = x.lambda;
     var power = math.Log10(lambda);
     var scale = 10e-3
@@ -33,14 +33,14 @@ func (x Poisson) R() (res int){
     }
     // TODO : here is a HUGE approximation
     // plus it does work bad (results get underestimated) if lambda is under 10e-3
-    // a complete process to simulate Poisson is harder to implement but possible,
+    // a complete process to simulate Pois is harder to implement but possible,
     // and as been don  e
     var binom = NewBinom(int(math.Ceil(lambda/scale)), scale)
     res = binom.R()
     return
 }
-// Rn Generate an array of random values following the same Poisson distribution as x
-func (x Poisson) Rn(n int) (res []int){
+// Rn Generate an array of random values following the same Pois distribution as x
+func (x Pois) Rn(n int) (res []int){
     res = make([]int, n)
     for i := 0; i < n; i++ {
         res[i] = x.R()
@@ -48,8 +48,8 @@ func (x Poisson) Rn(n int) (res []int){
     return
 }
 
-// D Density probability function of the the Poisson distribution
-func (x Poisson) D(k int) (f float64){
+// D Density probability function of the the Pois distribution
+func (x Pois) D(k int) (f float64){
     norm := math.Exp(-x.lambda)
     // this syntax avoid explosion, we multiply result by lambda, then divide it,
     // so that mult is neither too small nor too big after each step

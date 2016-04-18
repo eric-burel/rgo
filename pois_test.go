@@ -5,29 +5,29 @@ import(
     "github.com/stretchr/testify/assert"
 )
 
-func TestNewPoisson(t *testing.T) {
-    var x = NewPoisson(6)
+func TestNewPois(t *testing.T) {
+    var x = NewPois(6)
     assert.Equal(t, 6., x.lambda)
 }
-func TestNewStdPoisson(t *testing.T) {
-    var x = NewStdPoisson()
+func TestNewStdPois(t *testing.T) {
+    var x = NewStdPois()
     assert.Equal(t, 1., x.lambda)
 }
 
-func TestPoissonR(t *testing.T){
-    var x = NewStdPoisson()
+func TestPoisR(t *testing.T){
+    var x = NewStdPois()
     var x1 = x.R()
     assert.NotNil(t,x1)
     assert.True(t, x1>=0)
 }
-func TestPoissonRn(t *testing.T){
-    var x = NewStdPoisson()
+func TestPoisRn(t *testing.T){
+    var x = NewStdPois()
     var x1 = x.Rn(20)
     assert.Equal(t,20, len(x1))
     t.Logf("Generated values with lambda=1 : %v", x1)
 }
-func TestPoissonD(t *testing.T){
-    var x = NewStdPoisson()
+func TestPoisD(t *testing.T){
+    var x = NewStdPois()
     var v1 = x.D(1)
     var v2 = x.D(5)
     var v3 = x.D(10)
@@ -37,8 +37,8 @@ func TestPoissonD(t *testing.T){
     assert.InDelta(t, 0.003065662, v2, eps)
     assert.InDelta(t, 1.013777e-07, v3, eps)
 }
-func TestPoisson10D(t *testing.T){
-    var x = NewPoisson(50)
+func TestPois10D(t *testing.T){
+    var x = NewPois(50)
     var v1 = x.D(0)
     var v2 = x.D(10)
     var v3 = x.D(25)
@@ -53,8 +53,8 @@ func TestPoisson10D(t *testing.T){
     assert.InDelta(t,  0.0002057854, v5, eps)
     assert.InDelta(t,  1.630319e-10, v6, eps)
 }
-func TestPoissonDHuge(t *testing.T){
-    var x = NewStdPoisson()
+func TestPoisDHuge(t *testing.T){
+    var x = NewStdPois()
     var v1 = x.D(100)
     var v2 = x.D(20000)
     // does not end
@@ -65,7 +65,7 @@ func TestPoissonDHuge(t *testing.T){
     //assert.InDelta(t, 0., v3, eps)
 }
 
-func TestPoissonP(t *testing.T){
+func TestPoisP(t *testing.T){
 }
-func TestPoissonQ(t *testing.T){
+func TestPoisQ(t *testing.T){
 }

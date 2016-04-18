@@ -5,30 +5,30 @@ import(
     "github.com/stretchr/testify/assert"
 )
 
-func TestNewNormal(t *testing.T) {
-    var x = NewNormal(20,2)
+func TestNewNorm(t *testing.T) {
+    var x = NewNorm(20,2)
     assert.Equal(t, 20., x.mu)
     assert.Equal(t, 2., x.sigma)
 }
-func TestNewStdNormal(t *testing.T) {
-    var x = NewStdNormal()
+func TestNewStdNorm(t *testing.T) {
+    var x = NewStdNorm()
     assert.Equal(t, 0., x.mu)
     assert.Equal(t, 1., x.sigma)
 }
 
-func TestNormalR(t *testing.T){
-    var x = NewStdNormal()
+func TestNormR(t *testing.T){
+    var x = NewStdNorm()
     var x1 = x.R()
     assert.NotNil(t,x1)
 }
-func TestNormalRn(t *testing.T){
-    var x = NewStdNormal()
+func TestNormRn(t *testing.T){
+    var x = NewStdNorm()
     var x1 = x.Rn(20)
     assert.Equal(t,20, len(x1))
     t.Logf("Generated values with mu = 0, sigma = 1 : %v", x1)
 }
-func TestNormalDSmall(t *testing.T){
-    var x = NewStdNormal()
+func TestNormDSmall(t *testing.T){
+    var x = NewStdNorm()
     var v1 = x.D(0.01)
     var v2 = x.D(0.005)
     var v3 = x.D(1/100000)
@@ -38,8 +38,8 @@ func TestNormalDSmall(t *testing.T){
     assert.InDelta(t, 0.3989373, v2, eps)
     assert.InDelta(t, 0.3989423, v3, eps)
 }
-func TestNormalD(t *testing.T){
-    var x = NewStdNormal()
+func TestNormD(t *testing.T){
+    var x = NewStdNorm()
     var v1 = x.D(0.)
     var v2 = x.D(0.5)
     var v3 = x.D(1.)
@@ -50,8 +50,8 @@ func TestNormalD(t *testing.T){
     assert.InDelta(t, 0.2419707, v3, eps)
     assert.InDelta(t, 5.53071e-50, v4, eps)
 }
-func TestNormalDHuge(t *testing.T){
-    var x = NewStdNormal()
+func TestNormDHuge(t *testing.T){
+    var x = NewStdNorm()
     var v1 = x.D(100)
     var v2 = x.D(20000)
     var v3 = x.D(50000000000)
@@ -61,7 +61,7 @@ func TestNormalDHuge(t *testing.T){
     assert.InDelta(t, 0., v3, eps)
 }
 
-func TestNormalP(t *testing.T){
+func TestNormP(t *testing.T){
 }
-func TestNormalQ(t *testing.T){
+func TestNormQ(t *testing.T){
 }
