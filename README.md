@@ -69,6 +69,13 @@ Working on it...
 ## Quantile
 Working on it...
 
+## Edge cases
+### Geometric law
+Geometric law has two common definitions ([see wikipedia](https://en.wikipedia.org/wiki/Geometric_distribution)), depending on whether the support function includes 0 or not.
+
+We chose the same definition as R, meaning __P(X=0) = p, with X following a geometric distribution G(p)__.
+This behaviour may differ from what you are used to. For example in France, we prefer to start with k=1, meaning P(X=1) = p, so that k is the number of draws before a success.
+
 # Roadmap
 - [ ] add most basic functions : bernouilli, uniform, binomial, poisson, geom, exponential
 - [ ] add most common probability laws (Gaussian, Poisson and so on)
