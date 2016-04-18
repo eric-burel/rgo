@@ -47,7 +47,7 @@ for _, t := range(thisWeekTemperature){
 
 // Another example using standard definition of laws when they exist
 y := NewStdUnif()   // use classical definition, ie interval [0.,1.[
-whiteNoise := y.R() // white nose is between 0. and 1.
+whiteNoise := y.R() // white noise is between 0. and 1.
 
 
 ```
@@ -62,6 +62,7 @@ Please avoid using this package to build a banking system or a flight autopilot 
 
 ## Density function
 Density function calculation are implemented naively using their definitions. Optimal performances are not guaranteed.
+They are tested against values given by R equivalent commands.
 
 ## Cumulative distribution function
 Working on it...
@@ -69,6 +70,7 @@ Working on it...
 Working on it...
 
 # Roadmap
+- [ ] add most basic functions : bernouilli, uniform, binomial, poisson, geom, exponential
 - [ ] add most common probability laws (Gaussian, Poisson and so on)
 - [ ] add other less common laws (Reverse Binomial *et al.*)
 - [ ] implement quantile calculation
