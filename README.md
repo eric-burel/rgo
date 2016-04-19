@@ -1,4 +1,4 @@
-# rgo
+# rgo [![Build Status](https://travis-ci.org/eric-burel/rgo.svg?branch=master)](https://travis-ci.org/eric-burel/rgo)
 Advanced random number simulation for Golang, inspired by R
 
 Implements r*func*,d*func*,p*func* and q*func* functions for most common probabilistic laws.
