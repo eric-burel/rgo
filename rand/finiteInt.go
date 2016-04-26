@@ -1,4 +1,4 @@
-package rgo
+package rand
 
 // FiniteInt A variable following a binomial distribution
 type FiniteInt struct {

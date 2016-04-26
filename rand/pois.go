@@ -1,4 +1,4 @@
-package rgo
+package rand
 
 import(
     "math"
