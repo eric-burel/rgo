@@ -6,6 +6,17 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestImplementSampler(t *testing.T) {
+	//@see https://splice.com/blog/golang-verify-type-implements-interface-compile-time/
+	// this won't compile if Int does not implement Sampler
+	var _ Sampler = (*Int)(nil)
+}
+func TestImplementInterface(t *testing.T) {
+	var _ Interface = (*Int)(nil)
+}
+func TestImplementInter(t *testing.T) {
+	var _ Inter = (*Int)(nil)
+}
 func TestNewSampleInt(t *testing.T) {
 	x := NewInt([]int{1, 2, 3})
 	assert.NotNil(t, x)
