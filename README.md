@@ -109,6 +109,8 @@ Once again, this behaviour is the same as R.
 
 # Roadmap
 - [x] add most basic functions : bernouilli, uniform, binomial, poisson, normal, geom, exponential
+- [x] add basic sample analysis (mean, variance, min/max, median and so on)
+- [ ] add more complex sample analysis (covariance, linear regression and so on)
 - [ ] add other less common laws (Reverse Binomial *et al.*)
 - [ ] implement quantile calculation
 - [ ] implement cumulative density functions
