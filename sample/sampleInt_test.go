@@ -87,6 +87,12 @@ func TestEmptySample(t *testing.T) {
 	x := NewInt([]int{})
 	assert.Equal(t, 0, x.Sum())
 	assert.Equal(t, 1, x.Prod())
-	assert.Equal(t, 0., x.Mean()) // is that a correct math definition ?
-	assert.Equal(t, 0., x.Var())
+	assert.Panics(t, func() { x.Mean() })
+	assert.Panics(t, func() { x.Var() })
+	assert.Panics(t, func() { x.Min() })
+	assert.Panics(t, func() { x.Max() })
+	assert.Panics(t, func() { x.Argmin() })
+	assert.Panics(t, func() { x.Argmax() })
+	assert.Panics(t, func() { x.ArgminAll() })
+	assert.Panics(t, func() { x.ArgmaxAll() })
 }

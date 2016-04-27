@@ -54,12 +54,16 @@ func sumFloat64(s Interface) (sum float64) {
 
 // Mean The mean of a sample
 func Mean(s Interface) (mean float64) {
-	length := s.Length()
-	if length == 0 {
-		return 0
+	n := s.Length()
+	switch n {
+	case 0:
+		panic("can not compute variance of an empty sample")
+	case 1:
+		return s.GetValueFloat64(0)
+	default:
+		mean = sumFloat64(s) / float64(n)
+		return
 	}
-	mean = sumFloat64(s) / float64(length)
-	return
 }
 
 func squareDiff(s Interface) float64 {
@@ -76,7 +80,14 @@ func squareDiff(s Interface) float64 {
 // Var Variance of a sample
 func Var(s Interface) (sigma2 float64) {
 	n := s.Length()
-	return squareDiff(s) / float64(n-1)
+	switch n {
+	case 0:
+		panic("can not compute variance of an empty sample")
+	case 1:
+		return 0
+	default:
+		return squareDiff(s) / float64(n-1)
+	}
 }
 
 // Extremum Returns an extremum, given a comparison function
