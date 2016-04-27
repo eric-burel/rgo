@@ -24,15 +24,15 @@ import (
 
 [See godoc](https://godoc.org/github.com/eric-burel/rgo) for a list of all functionnalities.
 
-An example :
+An example with rand:
 
 ```go
 package main
 
 import (
-  "github.com/eric-burel/rgo"
+  "github.com/eric-burel/rgo/rand"
 )
-x := NewNorm(25.,1.)
+x := rand.NewNorm(25.,1.)
 
 todayTemperature := x.R()       // generate a random value, following a N(25,1) distributon
 thisWeekTemperature := x.Rn(7)  // generate an array of 7 random values
@@ -46,9 +46,34 @@ for _, t := range(thisWeekTemperature){
 }
 
 // Another example using standard definition of laws when they exist
-y := NewStdUnif()   // use classical definition, ie interval [0.,1.[
+y := rand.NewStdUnif()   // use classical definition, ie interval [0.,1.[
 whiteNoise := y.R() // white noise is between 0. and 1.
 
+
+```
+An example of sample analysis :
+```go
+package main
+
+import (
+  "github.com/eric-burel/rgo/sample"
+)
+
+thisWeekTemperatures := []int{15,18,13,12,12,20,22}
+x := sample.NewInt(thisWeekTemperatures) // generate a new rgo sample
+
+avgTemperature := x.Mean()
+variance := x.Var() // UNBIASED VARIANCE, with n-1 as the denominator (not n)
+coldestDay := x.Argmin() // will return 3, first match of 12 degrees
+coldestDays := x.ArgminAll() // will return []int{3,4}, days where temperatures was the coldest
+hottestTemperature := x.Max() // 22
+
+// same apply with float64
+sprintDuration := []float64{10.009,10.001,9.887,9.129}
+y := sample.NewFloat(sprintDuration)
+
+
+...
 
 ```
 
@@ -75,6 +100,12 @@ Geometric law has two common definitions ([see wikipedia](https://en.wikipedia.o
 
 We chose the same definition as R, meaning __P(X=0) = p, with X following a geometric distribution G(p)__.
 This behaviour may differ from what you are used to. For example in France, we prefer to start with k=1, meaning P(X=1) = p, so that k is the number of draws before a success.
+
+### Empirical variance of a sample
+The calculated variance ``x.Var()`` is unbiased, meaning the denominator is __n-1__, where __n__ is the size of the sample. This way, ``x.Var()`` is a good estimator of the actual variance of the probabilistic law under the sample.
+It is different from the classical definition of the variance, with __n__ as the denominator, which is nice but biased.
+
+Once again, this behaviour is the same as R.
 
 # Roadmap
 - [x] add most basic functions : bernouilli, uniform, binomial, poisson, normal, geom, exponential
