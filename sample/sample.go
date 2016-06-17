@@ -8,7 +8,10 @@
  */
 package sample
 
-import "sort"
+import (
+	"math"
+	"sort"
+)
 
 // Interface Minimum functions to be a sample
 type Interface interface {
@@ -26,21 +29,43 @@ type Sampler interface {
 	ArgmaxAll() []int
 	Var() float64
 	Median() float64
+	Quantile(p float64) float64
 }
 
+// Quantile Compute a quantile
+// @see https://stat.ethz.ch/R-manual/R-devel/library/stats/html/quantile.html
+func Quantile(s Interface, p float64) (qp float64) {
+	l := s.Length()
+	if l == 0 {
+		panic("can't compute quantile on an empty sample")
+	}
+	sorted := s
+	sort.Sort(sorted)
+	// quantile is between two indexes
+	// if we replace p by 0.5, we find the median
+	// TODO : p or 1-p ?
+	// if even
+	var floatIdx float64
+	floatIdx = p * float64(l-1)
+	truncatedIdx := math.Floor(floatIdx)
+	left := floatIdx - truncatedIdx
+	intIdx := int(truncatedIdx)
+	// np is an integer
+	if left >= 10e-8 {
+		qp = (s.GetValueFloat64(intIdx) + s.GetValueFloat64(intIdx+1)) / 2.
+	} else {
+		// if rest is zero, the idx exists in the sample => we directly return the value
+		qp = s.GetValueFloat64(intIdx)
+	}
+	return
+}
+
+// Median The median
 func Median(s Interface) (mu float64) {
 	if s.Length() == 0 {
 		panic("can't compute median on an empty sample")
 	}
-	sorted := s
-	sort.Sort(sorted)
-	length := sorted.Length()
-	if length%2 == 1 {
-		mu = sorted.GetValueFloat64(length / 2)
-		return
-	}
-	mu = (sorted.GetValueFloat64(length/2-1) + sorted.GetValueFloat64(length/2)) / 2.
-	return
+	return Quantile(s, 0.5)
 }
 
 // Calculate the sum of elements in the vector, as a float64

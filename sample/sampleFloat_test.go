@@ -70,6 +70,14 @@ func TestFloatMedian(t *testing.T) {
 	x2 := NewFloat([]float64{1., 2.})
 	assert.Equal(t, 1.5, x2.Median())
 }
+func TestFloatQuantile(t *testing.T) {
+	x1 := NewFloat([]float64{1., 2., 3.})
+	assert.Equal(t, 2., x1.Quantile(0.5))
+	x2 := NewFloat([]float64{1., 2.})
+	assert.Equal(t, 1.5, x2.Quantile(0.5))
+	x3 := NewFloat([]float64{1., 2., 3., 4., 5., 6., 7., 8.})
+	assert.Equal(t, 6.5, x3.Quantile(0.75))
+}
 
 func TestFloatVar(t *testing.T) {
 	x := NewFloat([]float64{4., 2., 0.})

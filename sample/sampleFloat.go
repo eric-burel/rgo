@@ -85,6 +85,9 @@ func (s Float) ArgmaxAll() (argmax []int) {
 func (s Float) Median() (mu float64) {
 	return Median(s)
 }
+func (s Float) Quantile(p float64) (mu float64) {
+	return Quantile(s, p)
+}
 
 // Var Unbiased variance calculation
 // NOTE : Beware ! this is NOT sqrt(cov(x,x)), as it is divided by n-1 not by n
