@@ -22,6 +22,15 @@ func TestNewSampleInt(t *testing.T) {
 	assert.NotNil(t, x)
 }
 
+func TestTrim(t *testing.T) {
+	x := NewInt([]int{0, 0, 1, 2, 3, 0, 0, 0})
+	assert.Equal(t, 2, firstNonZeroIdx(*x))
+	assert.Equal(t, 4, lastNonZeroIdx(*x))
+	expected := NewInt([]int{1, 2, 3})
+	assert.Equal(t, expected, x.Trim())
+
+}
+
 func TestSum(t *testing.T) {
 	x := NewInt([]int{1, 2, 3})
 	sum := x.Sum()

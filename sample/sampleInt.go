@@ -36,15 +36,35 @@ func (s Int) Swap(i, j int) {
 	return
 }
 
-// Trim Take the zero out of the sample and return a new one
-func (s Int) Trim(st Int) {
-	var trimmed []int
-	for _, value = range s {
-		if value != 0 {
-			trimmed = append(trimmed, value)
+func firstNonZeroIdx(s Int) int {
+	// search the index of the first non zero value
+	for idx, val := range s {
+		if val != 0 {
+			return idx
 		}
 	}
-	return NewInt(trimmed)
+	return -1
+}
+func lastNonZeroIdx(s Int) int {
+	// search the index of the first non zero value
+	for idx := range s {
+		reverseIdx := len(s) - idx - 1
+		if s[reverseIdx] != 0 {
+			return reverseIdx
+		}
+	}
+	return -1
+
+}
+
+// Trim Take the firsts and last zeros out of the sample and return a new one
+func (s Int) Trim() *Int {
+	beginIdx := firstNonZeroIdx(s)
+	endIdx := lastNonZeroIdx(s)
+	if beginIdx == -1 || endIdx == -1 {
+		return NewInt([]int{})
+	}
+	return NewInt(s[beginIdx:(endIdx + 1)])
 }
 
 // GetValueInt64 Retrieve ith element and converts it to a float64
