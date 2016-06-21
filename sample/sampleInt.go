@@ -36,6 +36,17 @@ func (s Int) Swap(i, j int) {
 	return
 }
 
+// Trim Take the zero out of the sample and return a new one
+func (s Int) Trim(st Int) {
+	var trimmed []int
+	for _, value = range s {
+		if value != 0 {
+			trimmed = append(trimmed, value)
+		}
+	}
+	return NewInt(trimmed)
+}
+
 // GetValueInt64 Retrieve ith element and converts it to a float64
 func (s Int) GetValueFloat64(index int) (value float64) {
 	value = float64(s[index])
