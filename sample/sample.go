@@ -82,7 +82,7 @@ func Mean(s Interface) (mean float64) {
 	n := s.Length()
 	switch n {
 	case 0:
-		panic("can not compute variance of an empty sample")
+		panic("can not compute mean of an empty sample")
 	case 1:
 		return s.GetValueFloat64(0)
 	default:
